@@ -1,6 +1,15 @@
 import React from 'react'
 
-const ContactForm = ({ firstName, lastName, phone }) => {
+import ContactInput from './ContactInput'
+
+const ContactForm = ({
+  firstName,
+  lastName,
+  phone,
+  onChange,
+  onBlur,
+  onSubmit
+}) => {
   return (
     <div>
       <h3>Nuevo Contacto</h3>
@@ -9,11 +18,14 @@ const ContactForm = ({ firstName, lastName, phone }) => {
           <label htmlFor="firstName">Nombre</label>
         </div>
         <div className="col col-9">
-          <input
+          <ContactInput
             id="firstName"
             name="firstName"
             type="text"
-            value={firstName}
+            value={firstName.value}
+            error={firstName.error}
+            onChange={onChange}
+            onBlur={onBlur}
           />
         </div>
       </div>
@@ -22,7 +34,15 @@ const ContactForm = ({ firstName, lastName, phone }) => {
           <label htmlFor="lastName">Apellido</label>
         </div>
         <div className="col col-9">
-          <input id="lastName" name="lastName" type="text" value={lastName} />
+          <ContactInput
+            id="lastName"
+            name="lastName"
+            type="text"
+            value={lastName.value}
+            error={lastName.error}
+            onChange={onChange}
+            onBlur={onBlur}
+          />
         </div>
       </div>
       <div className="form-group row">
@@ -30,11 +50,21 @@ const ContactForm = ({ firstName, lastName, phone }) => {
           <label htmlFor="phone">Teléfono</label>
         </div>
         <div className="col col-9">
-          <input id="phone" name="phone" type="text" value={phone} />
+          <ContactInput
+            id="phone"
+            name="phone"
+            type="phone"
+            value={phone.value}
+            error={phone.error}
+            onChange={onChange}
+            onBlur={onBlur}
+          />
         </div>
       </div>
       <div className="form-group text-center">
-        <button className="btn btn-primary">Guardar</button>
+        <button className="btn btn-primary" onClick={onSubmit}>
+          Guardar
+        </button>
       </div>
     </div>
   )
